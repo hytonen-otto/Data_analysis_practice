@@ -1,8 +1,32 @@
 from fmiopendata.wfs import download_stored_query
 
-#Joko nyt on oikea nimi vakiona?
-
 composites = download_stored_query("fmi::radar::composite::dbz")
 
-# %%
-#Ajettavia soluja tehdään näin
+
+import numpy as np
+
+composite = composites.data[0]
+# Download the image data
+composite.download()
+# Calibrate the data from image values to dBZ
+# Calls `composite.download() if data are not already downloaded
+composite.calibrate()
+# Get mask for area outside the radar reach
+# Calls `composite.download() if data are not already downloaded
+mask1 = composite.get_area_mask()
+# Get mask for invalid data
+# Calls `composite.download() if data are not already downloaded
+mask2 = composite.get_data_mask()
+# Mask all the invalid areas using the above masks
+composite.data[mask1 | mask2] = np.nan
+
+# Plot the data for preview
+import matplotlib.pyplot as plt
+
+plt.imshow(composite.data[0, :, :])
+plt.show()
+
+#Ajettavia soluja tehdään näin: #%%
+#Solu ei näe ulkopuolisia asioita
+#Solu ajetaan myös aina koodin ajon yhteydessä!
+#Voisi käyttää esim, jos ei halua ajaa koodin raskasta osaa uudestaan!
