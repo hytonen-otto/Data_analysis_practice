@@ -5,7 +5,7 @@ composites = download_stored_query("fmi::radar::composite::dbz")
 
 import numpy as np
 
-composite = composites.data[0]
+composite = composites.data[-1] #For some reason, -1 is the newest and 0 is about 1h before that
 # Download the image data
 composite.download()
 # Calibrate the data from image values to dBZ
@@ -22,6 +22,8 @@ composite.data[mask1 | mask2] = np.nan
 
 # Plot the data for preview
 import matplotlib.pyplot as plt
+
+print(composite.time) #Composite is a radar object that has the time attribute or whatever, (time in utc)
 
 plt.imshow(composite.data[0, :, :])
 plt.show()
