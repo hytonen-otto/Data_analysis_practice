@@ -2,12 +2,14 @@ from fmiopendata.wfs import download_stored_query
 
 composites = download_stored_query("fmi::radar::composite::dbz")
 
-
 import numpy as np
 
-composite = composites.data[-1] #For some reason, -1 is the newest and 0 is about 1h before that
+composite = composites.data[0] #For some reason, -1 is the newest and 0 is about 1h before that
+
 # Download the image data
+#This stopped working on May 28th, no idea why 
 composite.download()
+
 # Calibrate the data from image values to dBZ
 # Calls `composite.download() if data are not already downloaded
 composite.calibrate()
