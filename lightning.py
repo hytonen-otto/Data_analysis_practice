@@ -1,6 +1,6 @@
+from fmiopendata.wfs import download_stored_query
 import matplotlib.pyplot as plt
 import numpy as np
-from fmiopendata.wfs import download_stored_query
 from cartopy import crs as ccrs, geodesic as gd
 import cartopy.io.img_tiles as cimgt
 import shapely
