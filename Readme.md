@@ -5,3 +5,4 @@
   >Learned the basics
 - Learning the basics of SQL?
   >Added example code about Oracle data base connection
+-Editing matplotlib rcparams 
