@@ -1,0 +1,41 @@
+#Mystyle, based on seaborne_v0_8_whitegrid
+
+
+
+# .15 = dark_gray
+# .8 = light_gray
+figure.figsize:     10,7
+figure.facecolor:   white           
+text.color: .15
+axes.labelcolor: .15
+legend.frameon: False
+legend.numpoints: 1
+legend.scatterpoints: 1
+xtick.direction: out
+ytick.direction: out
+xtick.color: .15
+ytick.color: .15
+axes.axisbelow: True
+image.cmap: Greys
+font.family: sans-serif
+font.sans-serif: Arial, Liberation Sans, DejaVu Sans, Bitstream Vera Sans, sans-serif
+grid.linestyle: -
+lines.solid_capstyle: round
+
+#Font sizes etc.
+axes.titlesize: 20
+axes.labelsize: 16
+xtick.labelsize: 14
+ytick.labelsize: 14
+
+
+# Seaborn whitegrid parameters
+axes.grid: True
+axes.facecolor: white
+axes.edgecolor: .8
+axes.linewidth: 1
+grid.color: .8
+xtick.major.size: 0
+ytick.major.size: 0
+xtick.minor.size: 0
+ytick.minor.size: 0
