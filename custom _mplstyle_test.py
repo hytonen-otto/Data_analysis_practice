@@ -12,6 +12,7 @@ ax.set_title('Sine waves')
 ax.set_xlabel('X-axis')
 ax.set_ylabel('Y-axis')
 for i in range(0,5):
-    ax.plot(np.linspace(0,10,100),np.sin(i+np.linspace(0,10,100)),label=f'i value = {i}')
+    ax.errorbar(np.linspace(0,10,10),np.sin(i+np.linspace(0,10,10)),yerr=np.random.rand(10)*0.2, fmt='.k',capsize = 2)
+    ax.plot(np.linspace(0,10,100),np.sin(i+np.linspace(0,10,100)), label=f'i value = {i}')
 ax.legend()
 plt.show()
