@@ -7,13 +7,12 @@ import shapely
 import datetime as dt
 
 #Coordinates for drawing and fetching the data.
-#Bigger area crashes the code if line 59 map zoom level is not lowered
-
+#Bigger area crashes the code if zoom level is not lowered
 latN = 60.5
 latS = 60.15
 lonW = 24.5
 lonE = 25.4
-zoom_level = 10
+zoom_level = 10 #Basically map resolution
 
 '''
 #Time window for the data 
