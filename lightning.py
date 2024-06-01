@@ -6,26 +6,27 @@ import cartopy.io.img_tiles as cimgt
 import shapely
 import datetime as dt
 
-#Coordinates for drawing and fetching the data
+#Coordinates for drawing and fetching the data.
+#Bigger area crashes the code if line 59 map zoom level is not lowered
 
 latN = 60.5
 latS = 60.15
 lonW = 24.5 
-lonE = 25.5
+lonE = 25.4
 
 
 
 #Time window for the data 
-#start_time = '2024-06-01T11:15:00Z'
-#end_time = '2024-06-01T11:20:00Z'
+start_time = '2024-06-01T11:15:00Z'
+end_time = '2024-06-01T11:20:00Z'
 
-
+'''
 #Retrieving the latest 15min of data from a bounding box
 end_time = dt.datetime.now()
 start_time = end_time - dt.timedelta(minutes=15)
 start_time = start_time.isoformat(timespec="seconds") + "Z" # Convert times to properly formatted strings
 end_time = end_time.isoformat(timespec="seconds") + "Z" # -> 2020-07-07T12:00:00Z
-
+'''
 
 
 #Fetching the data
@@ -55,7 +56,7 @@ request = cimgt.OSM() #Requesting open street map
 #Drawing the plot
 fig1 = plt.figure(figsize=(9,5),layout="constrained")
 ax = plt.subplot(projection=request.crs) #Specifying the projection
-ax.add_image(request,10,interpolation='none') #Adding the map
+ax.add_image(request,11,interpolation='none') #Adding the map
 ax.set_extent([lonW, lonE, latS, latN]) #Limiting the map area (Crashs without this)
 ax.gridlines(draw_labels=True, zorder=5) #Drawing grid lines
 
