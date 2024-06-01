@@ -4,26 +4,41 @@ import numpy as np
 from cartopy import crs as ccrs, geodesic as gd
 import cartopy.io.img_tiles as cimgt
 import shapely
+import datetime as dt
 
 #Coordinates for drawing and fetching the data
-latN = 61
-latS = 60
-lonW = 24 
-lonE = 26
 
-#Time window for the data
-start_time = '2024-05-25T12:20:00Z'
-end_time = '2024-05-25T12:21:00Z'
- 
+latN = 60.5
+latS = 60.15
+lonW = 24.5 
+lonE = 25.5
+
+
+
+#Time window for the data 
+#start_time = '2024-06-01T11:15:00Z'
+#end_time = '2024-06-01T11:20:00Z'
+
+
+#Retrieving the latest 15min of data from a bounding box
+end_time = dt.datetime.now()
+start_time = end_time - dt.timedelta(minutes=15)
+start_time = start_time.isoformat(timespec="seconds") + "Z" # Convert times to properly formatted strings
+end_time = end_time.isoformat(timespec="seconds") + "Z" # -> 2020-07-07T12:00:00Z
+
+
+
 #Fetching the data
 lightning1 = download_stored_query("fmi::observations::lightning::multipointcoverage",args=["starttime=" + start_time,
-                                         "endtime=" + end_time,f"bbox={lonW},{lonE},{latS},{latN}"])
-
-print('Salamoiden lukumäärä: ', len(lightning1.times))
-print('Pienin virheraja (km): ', min(lightning1.ellipse_major))
-print('Suurin virheraja (km): ', max(lightning1.ellipse_major))
-print('Keskimääräinen virheraja (km): ', np.average(lightning1.ellipse_major))
-
+                                         "endtime=" + end_time,f"bbox={lonW},{latS},{lonE},{latN}"])
+try:
+    print('Salamoiden lukumäärä: ', len(lightning1.times))
+    print('Pienin virheraja (km): ', min(lightning1.ellipse_major))
+    print('Suurin virheraja (km): ', max(lightning1.ellipse_major))
+    print('Keskimääräinen virheraja (km): ', np.average(lightning1.ellipse_major))
+except:
+    exit() #Ending code run if not lightning in the area
+    
 
 '''
 lightning1.latitudes  # Latitude of the lightning event [° North]
